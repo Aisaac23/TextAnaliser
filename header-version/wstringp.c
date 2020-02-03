@@ -1,6 +1,7 @@
 #include "wstringp.h"
 #define ONE_MEGABYTE 1048576
 
+//Gets a single wchar_t string form a file
 wchar_t* loadData(char *fileName)
 {
 	FILE *bigText;
@@ -31,21 +32,25 @@ wchar_t* loadData(char *fileName)
 	return fileString;
 }
 
+//sets the minimum length in characters for a string to be considered a paragraph.
 void setParagraphLength(int len)
 {
 	textAnalizer_minParagraphLenth = len;
 }
 
+//sets the minimum length in characters for a string to be considered a word.
 void setMinWordLength(int len)
 {
 	textAnalizer_minLengthByWord = len;
 }
 
+//returns the total length of the string.
 unsigned long long totalTextLength(wchar_t *mainString)
 {
 	return wcslen(mainString);
 }
 
+//Counts all the printable characters.
 unsigned long long countPrintableCharacters(wchar_t *mainString)
 {
 	unsigned long long count = 0, length;
@@ -57,6 +62,7 @@ unsigned long long countPrintableCharacters(wchar_t *mainString)
 	return count;
 }
 
+//Counts all the whitespace characters.
 unsigned long long countNonPrintableCharacters(wchar_t *mainString)
 {
 	unsigned long long count = 0, length;
@@ -68,6 +74,7 @@ unsigned long long countNonPrintableCharacters(wchar_t *mainString)
 	return count;
 }
 
+//Counts all the inidividual digits (0-9) 
 unsigned long long countDigits(wchar_t *mainString)
 {
 	unsigned long long count = 0, length;
@@ -79,6 +86,7 @@ unsigned long long countDigits(wchar_t *mainString)
 	return count;
 }
 
+//Counts all the inidividual alphabetic letters (a-z or A-Z) 
 unsigned long long countAlphabeticCharacters(wchar_t *mainString)
 {
 	unsigned long long count = 0, length;
@@ -92,6 +100,7 @@ unsigned long long countAlphabeticCharacters(wchar_t *mainString)
 	return count;
 }
 
+//Counts all the inidividual punctuation characters
 unsigned long long countPunctuationCharacters(wchar_t *mainString)
 {
 	unsigned long long count = 0, length;
@@ -103,6 +112,7 @@ unsigned long long countPunctuationCharacters(wchar_t *mainString)
 	return count;
 }
 
+//Gets all the inidividual punctuation characters concatenated in a string (including repeated ones).
 wchar_t * getPuntuationCharacters(wchar_t *mainString)
 {
 	unsigned long long count = 0, length;
@@ -119,6 +129,7 @@ wchar_t * getPuntuationCharacters(wchar_t *mainString)
 	return chars;
 }
 
+//Counts all the inidividual spaces
 unsigned long long countSpaces(wchar_t *mainString)
 {
 	unsigned long long count = 0, length;
@@ -130,6 +141,7 @@ unsigned long long countSpaces(wchar_t *mainString)
 	return count;
 }
 
+//Counts all the inidividual lines (new lines)
 unsigned long long countLines(wchar_t *mainString)
 {
 	unsigned long long count = 0, length;
@@ -141,6 +153,7 @@ unsigned long long countLines(wchar_t *mainString)
 	return count;
 }
 
+//Counts all the inidividual wide characters characters
 unsigned long long countWideCharacters(wchar_t *mainString)
 {
 	unsigned long long count = 0, length;
@@ -152,6 +165,7 @@ unsigned long long countWideCharacters(wchar_t *mainString)
 	return count;
 }
 
+//Counts all the inidividual words that have at least one printable character.
 unsigned long long countWords( wchar_t *mainString )
 {
 	wchar_t *word, **tokBuff, *toMakeTokens;
@@ -181,7 +195,7 @@ unsigned long long countWords( wchar_t *mainString )
 	}
 	return count;	
 }
-
+//Counts all the inidividual words that its length is less than the minimum for a string to be considered a word, default is 4.
 unsigned long long countSmallWords( wchar_t *mainString )
 {
 	wchar_t *word, **tokBuff, *toMakeTokens;
@@ -214,6 +228,7 @@ unsigned long long countSmallWords( wchar_t *mainString )
 	return count;	
 }
 
+//Counts all the inidividual words that includes at least one wide characters characters
 unsigned long long countWideWords( wchar_t *mainString )
 {
 	wchar_t *word, **tokBuff, *toMakeTokens;
@@ -335,6 +350,7 @@ wchar_t **getWideWords( wchar_t *mainString )
 	return allWideWords;
 }
 
+//gets all the whole numbers like 1234 or 123.898
 wchar_t **getNumbers( wchar_t *mainString )
 {	
 	wchar_t *word, **allNumbers, **tokBuff, *toMakeTokens;
@@ -368,6 +384,7 @@ wchar_t **getNumbers( wchar_t *mainString )
 	return allNumbers;
 }
 
+//Counts all the whole numbers like 1234 or 123.898 or +7873
 unsigned long long countNumbers( wchar_t *mainString )
 {
 	wchar_t *word, **tokBuff, *toMakeTokens;
@@ -390,6 +407,7 @@ unsigned long long countNumbers( wchar_t *mainString )
 	return count;	
 }
 
+//Counts all the inidividual paragraphs that its length is greater or equal than the minimum for a string to be considered a paragraph, default is 30.
 unsigned long long countParagraphs( wchar_t *mainString )
 {
 	wchar_t *paragraph, **tokBuff, *toMakeTokens;
